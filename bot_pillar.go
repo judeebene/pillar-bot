@@ -13,16 +13,16 @@ import (
 )
 
 const (
-	SAMPLE_NAME = "Mattermost Bot Sample"
+	BOT_NAME = "Pillar Bot"
 
-	USER_EMAIL    = "bot@example.com"
-	USER_PASSWORD = "password1"
-	USER_NAME     = "samplebot"
-	USER_FIRST    = "Sample"
+	USER_EMAIL    = "*******@**.com"
+	USER_PASSWORD = "****"
+	USER_NAME     = "*****"
+	USER_FIRST    = "*****"
 	USER_LAST     = "Bot"
 
-	TEAM_NAME        = "botsample"
-	CHANNEL_LOG_NAME = "debugging-for-sample-bot"
+	TEAM_NAME        = "****"
+	CHANNEL_LOG_NAME = "debugging-for-pillar-bot"
 )
 
 var client *model.Client4
@@ -35,11 +35,11 @@ var debuggingChannel *model.Channel
 // Documentation for the Go driver can be found
 // at https://godoc.org/github.com/mattermost/platform/model#Client
 func main() {
-	println(SAMPLE_NAME)
+	println(BOT_NAME)
 
 	SetupGracefulShutdown()
 
-	client = model.NewAPIv4Client("http://localhost:8065")
+	client = model.NewAPIv4Client("https://community.pillarproject.io")
 
 	// Lets test to see if the mattermost server is up and running
 	MakeSureServerIsRunning()
@@ -61,10 +61,10 @@ func main() {
 
 	// Lets create a bot channel for logging debug messages into
 	CreateBotDebuggingChannelIfNeeded()
-	SendMsgToDebuggingChannel("_"+SAMPLE_NAME+" has **started** running_", "")
+	SendMsgToDebuggingChannel("_"+BOT_NAME+" has **started** running_", "")
 
 	// Lets start listening to some channels via the websocket!
-	webSocketClient, err := model.NewWebSocketClient("ws://localhost:8065", client.AuthToken)
+	webSocketClient, err := model.NewWebSocketClient("wss://community.pillarproject.io", client.AuthToken)
 	if err != nil {
 		println("We failed to connect to the web socket")
 		PrintError(err)
